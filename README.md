@@ -1,2 +1,2 @@
 # iperf-2.0.5-stable
-The iperf-2.0.5 project seems to be inactive, so I store fixes here.
+iperf-2.0.5 seems to be inactive, so I put my fixes here.
