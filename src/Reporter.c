@@ -339,7 +339,9 @@ void ReportPacket( ReportHeader* agent, ReportStruct *packet ) {
             // item
             while ( index == 0 ) {
                 Condition_Signal( &ReportCond );
+                Condition_Lock( ReportDoneCond );
                 Condition_Wait( &ReportDoneCond );
+                Condition_Unlock( ReportDoneCond );
                 index = agent->reporterindex;
             }
             agent->agentindex = 0;
@@ -347,7 +349,9 @@ void ReportPacket( ReportHeader* agent, ReportStruct *packet ) {
         // Need to make sure that reporter is not about to be "lapped"
         while ( index - 1 == agent->agentindex ) {
             Condition_Signal( &ReportCond );
+            Condition_Lock( ReportDoneCond );
             Condition_Wait( &ReportDoneCond );
+            Condition_Unlock( ReportDoneCond );
             index = agent->reporterindex;
         }
 
